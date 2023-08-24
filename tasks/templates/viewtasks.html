@@ -1,0 +1,66 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% tailwind_css %}
+
+</head>
+<body>
+    <p>{{request.user}}</p>
+    <p>sadasd</p>
+    <h1 class="text-2xl">hello this is tailwind</h1>
+    <div class="flex justify-center items-start py-8 min-h-screen">
+        <table class="w-auto">
+            <thead>
+                <tr class="border border-solid border-l-0 border-r-0">
+                    <th class="text-md px-6 py-3">Title</th>
+                    <th class="text-md px-6 py-3">Description</th>
+                    <th class="text-md px-6 py-3">Completed</th>
+                    <th class="text-md px-6 py-3">Created At</th>
+                    <th class="text-md px-6 py-3">Updated At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in all_tasks %}
+                    <tr>
+                        <td class="text-md px-6 py-2">{{task.title}}</td>
+                        <td class="text-md px-6 py-2">{{task.description}}</td>
+                        <td class="text-md px-6 py-2">{{task.completed}}</td>
+                        <td class="text-md px-6 py-2">{{task.created_at}}</td>
+                        <td class="text-md px-6 py-2">{{task.updated_at}}</td>
+                        <td class="text-md px-6 py-2">
+                            <a href="{% url 'update-task' task.id %}">
+                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                    Update
+                                </button>
+                            </a>
+                        </td>
+                        <td class="text-md px-6 py-2">
+                            <form action="{% url 'delete-task' task.id %}" method="post" onsubmit="return confirmDelete()">
+                                {% csrf_token %}
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+               
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    function confirmDelete() {
+    if (confirm("Are you sure you want to delete this task?")) {
+        return true;
+    } else {
+        return false;
+    }
+    }
+</script>
+</html>
