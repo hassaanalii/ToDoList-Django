@@ -32,7 +32,7 @@
                     <input type="password" class="border rounded-md py-1 w-50 focus:outline-none focus:ring-2 focus:ring-blue-500" name="{{form.password2.name}}">
                 </div>
             
-
+                {{form.errors}}
                 {% for message in messages%}
                     <p>{{message}}</p>
                 {% endfor %}
