@@ -13,27 +13,22 @@
         .text-brown2{
             color: #c79e6d;
         }
-
-        .addbutton:hover{
-            background-color: #c79e6d;
-        }
     </style>
     {% tailwind_css %}
 </head>
 <body>
     <nav class="text-brown p-4">
         <div class="container mx-auto flex justify-between items-center">
-            <a href="#" class="text-white text-2xl font-semibold">To Do List</a>
+            <a href="#" class="text-white text-xl md:text-2xl font-semibold">To Do List</a>
     
-            <div class="md:flex space-x-6">
+            <div class="md:flex md:space-x-6 md:items-center md:justify-between md:flex-row flex-col space-y-4 items-start justify-center">
                 <p class="text-black font-semibold border border-transparent px-4 py-2 rounded hover:border-black-600 hover:bg-black hover:text-white transition duration-300">Add Task</p>
             </div>
-            
         </div>
     </nav>
     
     <div class="h-screen flex justify-center items-center">
-        <form class="bg-white shadow-xl p-8 rounded-lg w-96 md:w-2/3 lg:w-1/2" action="" method="POST">
+        <form class="bg-white shadow-xl p-8 rounded-lg max-w-md mx-auto" action="" method="POST">
             {% csrf_token %}
     
             <label class="block text-brown2 font-bold mb-2" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
@@ -44,13 +39,8 @@
     
             <label class="block text-brown2 font-bold mt-4 mb-0" for="{{ form.completed.id_for_label }}">{{ form.completed.label }}</label>
             {{ form.completed }}
-            <input type="submit" value="Add" class="addbutton mt-4 bg-black px-6 py-2 text-white font-semibold rounded text-center w-1/5 text-center flex justify-center items-center">
-
-            
+            <input type="submit" value="Add" class="addbutton mt-4 bg-black px-4 py-2 text-white font-semibold rounded w-full">
         </form>
-
     </div>
-    
-    
 </body>
 </html>
