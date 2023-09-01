@@ -1,14 +1,15 @@
+# Python Standard Libraries
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
+
+# Third-Party Libraries (Assuming you have additional third-party imports)
 from .forms import TaskForm, CreateUserForm
 from .models import Task
-from django.contrib import messages
-from django.urls import reverse_lazy
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.decorators import login_required
 
-# Create your views here.
+# Custom View will have to be created as well if I use LoginView, here I am implementing the aunthicate function as well which makes this view better.
 def login_view(request):
-    context = {} 
     if request.method == 'POST':
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -19,9 +20,9 @@ def login_view(request):
             return redirect('landing-page')
         else:
             messages.info(request, 'Username or Password is incorrect!')
-            return render(request, 'login.html', context)
+            return render(request, 'login.html')
         
-    return render(request, 'login.html', context)
+    return render(request, 'login.html')
 
 def registration_view(request):
     form = CreateUserForm()
@@ -30,7 +31,7 @@ def registration_view(request):
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get("username")
-            messages.success(request, 'Account has been created for ' + user)
+            messages.success(request, f'Account has been created for {user}')
             return redirect("login")
 
     context = {'form' : form}
@@ -67,7 +68,7 @@ def update_task(request, primary_key):
     form = TaskForm(instance = specific_task)
     if request.method == 'POST':
         form = TaskForm(request.POST, instance = specific_task)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             return redirect('view-tasks')
 

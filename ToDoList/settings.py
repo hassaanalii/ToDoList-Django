@@ -93,6 +93,9 @@ DATABASES = {
         'HOST': 'localhost'
     }
 }
+# Make a migration file using python manage.py makemigrations
+# then make the migration into pgadmin using python manage.py sqlmigrate nameofapp nameofmigrationfile
+# then use python manage.py migrate
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

@@ -19,15 +19,15 @@ from django.urls import path, include
 from tasks.views import *
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('login', login_view, name = 'login'),
-    path('logout', logoutUser, name = 'logout'),
-    path('landing-page', landing_page, name = 'landing-page'),
-    path('register', registration_view, name = 'register'),
-    path('add-task', add_task, name = 'add-task'),
-    path('view-tasks', view_tasks, name = "view-tasks"),
-    path('update-task/<str:primary_key>', update_task, name = 'update-task'),
-    path('delete-task/<str:primary_key>', delete_task, name = 'delete-task'),
+    path('arbisoft/', admin.site.urls),
+    path('login/', login_view, name = 'login'),
+    path('logout/', logoutUser, name = 'logout'),
+    path('landing-page/', landing_page, name = 'landing-page'),
+    path('register/', registration_view, name = 'register'),
+    path('add-task/', add_task, name = 'add-task'),
+    path('view-tasks/', view_tasks, name = "view-tasks"),
+    path('update-task/<int:primary_key>', update_task, name = 'update-task'),
+    path('delete-task/<int:primary_key>', delete_task, name = 'delete-task'),
     path("__reload__/", include("django_browser_reload.urls")),
 
 
