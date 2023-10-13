@@ -1,0 +1,84 @@
+{% load static tailwind_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% tailwind_css %}
+    <style>
+        .text-brown {
+            
+            background-color:#c79e6d; /* Use the hex color code for brown */
+        }
+        .text-brown2{
+            color: #c79e6d;
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="text-brown p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'landing-page' %}" class="text-white text-2xl font-semibold">To Do List</a>
+    
+            <div class="md:flex space-x-6">
+                <a href="{% url 'view-tasks' %}" class="text-white border border-transparent px-4 py-2 rounded hover:border-gray-300 hover:bg-gray-100 hover:text-gray-800 transition duration-300">View Tasks</a>
+                <a href="{% url 'add-task' %}" class="text-white border border-transparent px-4 py-2 rounded hover:border-gray-300 hover:bg-gray-100 hover:text-gray-800 transition duration-300">Add Task</a>
+                <a href="{% url 'logout' %}" class="text-black font-semibold border border-transparent px-4 py-2 rounded hover:border-red-600 hover:bg-red-600 hover:text-black transition duration-300">Logout</a>
+            </div>
+            
+        </div>
+    </nav>
+    <div class="flex justify-center items-start py-8 min-h-screen mt-10">
+        <table class="w-auto">
+            <thead>
+                <tr class="border border-solid border-l-0 border-r-0">
+                    <th class="text-md px-6 py-3">Title</th>
+                    <th class="text-md px-6 py-3">Description</th>
+                    <th class="text-md px-6 py-3">Completed</th>
+                    <th class="text-md px-6 py-3">Created At</th>
+                    <th class="text-md px-6 py-3">Updated At</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in all_tasks %}
+                    <tr>
+                        <td class="text-md px-6 py-2">{{task.title}}</td>
+                        <td class="text-md px-6 py-2">{{task.description}}</td>
+                        <td class="text-md px-6 py-2">{{task.completed}}</td>
+                        <td class="text-md px-6 py-2">{{task.created_at}}</td>
+                        <td class="text-md px-6 py-2">{{task.updated_at}}</td>
+                        <td class="text-md px-6 py-2">
+                            <a href="{% url 'update-task' task.id %}">
+                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                                    Update
+                                </button>
+                            </a>
+                        </td>
+                        <td class="text-md px-6 py-2">
+                            <form action="{% url 'delete-task' task.id %}" method="post" onsubmit="return confirmDelete()">
+                                {% csrf_token %}
+                                <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                                    Delete
+                                </button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+               
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+    function confirmDelete() {
+    if (confirm("Are you sure you want to delete this task?")) {
+        return true;
+    } else {
+        return false;
+    }
+    }
+</script>
+</html>

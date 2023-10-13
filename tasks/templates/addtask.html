@@ -1,0 +1,46 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .text-brown {
+            
+            background-color:#c79e6d; /* Use the hex color code for brown */
+        }
+        .text-brown2{
+            color: #c79e6d;
+        }
+    </style>
+    {% tailwind_css %}
+</head>
+<body>
+    <nav class="text-brown p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="{% url 'landing-page' %}" class="text-white text-xl md:text-2xl font-semibold">To Do List</a>
+    
+            <div class="md:flex md:space-x-6 md:items-center md:justify-between md:flex-row flex-col space-y-4 items-start justify-center">
+                <p class="text-black font-semibold border border-transparent px-4 py-2 rounded hover:border-black-600 hover:bg-black hover:text-white transition duration-300">Add Task</p>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="h-screen flex justify-center items-center">
+        <form class="bg-white shadow-xl p-8 rounded-lg max-w-md mx-auto" action="" method="POST">
+            {% csrf_token %}
+    
+            <label class="block text-brown2 font-bold mb-2" for="{{ form.title.id_for_label }}">{{ form.title.label }}</label>
+            {{ form.title }}
+    
+            <label class="block text-brown2 font-bold mt-4 mb-2" for="{{ form.description.id_for_label }}">{{ form.description.label }}</label>
+            {{ form.description }}
+    
+            <label class="block text-brown2 font-bold mt-4 mb-0" for="{{ form.completed.id_for_label }}">{{ form.completed.label }}</label>
+            {{ form.completed }}
+            <input type="submit" value="Add" class="addbutton mt-4 bg-black px-4 py-2 text-white font-semibold rounded w-full">
+        </form>
+    </div>
+</body>
+</html>

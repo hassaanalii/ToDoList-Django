@@ -1,0 +1,44 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% tailwind_css %}
+    <style>
+        .text-brown {
+            
+            background-color:#c79e6d; /* Use the hex color code for brown */
+        }
+        .text-brown2{
+            color: #c79e6d;
+        }
+    </style>
+    
+</head>
+<body class="m-0">
+    
+    <nav class="text-brown p-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-white text-2xl font-semibold">To Do List</a>
+    
+            <div class="md:flex space-x-6">
+                <a href="{% url 'view-tasks' %}" class="text-white border border-transparent px-4 py-2 rounded hover:border-gray-300 hover:bg-gray-100 hover:text-gray-800 transition duration-300">View Tasks</a>
+                <a href="{% url 'add-task' %}" class="text-white border border-transparent px-4 py-2 rounded hover:border-gray-300 hover:bg-gray-100 hover:text-gray-800 transition duration-300">Add Task</a>
+                <a href="{% url 'logout' %}" class="text-black font-semibold border border-transparent px-4 py-2 rounded hover:border-red-600 hover:bg-red-600 hover:text-black transition duration-300">Logout</a>
+            </div>
+            
+        </div>
+    </nav>
+    <div class="bg-black h-screen flex justify-center items-center">
+        <div class="w-9/12 p-8 pb-20 ml-7">
+            <p class="text-white text-6xl mb-4 text-center">Welcome,  <span class="text-brown2 text-8xl">{{ request.user }}</span></p>
+            <p class="text-white text-center mt-10 font-bold">Stay organized and take control of your tasks with our intuitive to-do list app – your personal productivity companion.</p>
+        </div>
+        <img src="{% static 'images/todo.png' %}" alt="Your Image" class="w-1/2">
+    </div>
+    
+    
+</body>
+</html>
